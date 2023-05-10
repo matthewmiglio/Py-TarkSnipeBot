@@ -17,10 +17,18 @@ orientate_tarkov_client("EscapeFromTarkov", logger)
 
 def snipe_main():
     while 1:
+        prev_item_name = ''
+
+        #pick random item
         this_item = random.choice(data_list)
         print("\n-----------------------------------------")
 
+        #unpack name and price from tuple
         item_name = this_item[0]
+        if item_name == prev_item_name:
+            continue
+        else:
+            prev_item_name = item_name
         item_price = this_item[1] - 100
 
         print(f"Looking for {item_name} offers below {item_price}")
