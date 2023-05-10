@@ -17,7 +17,6 @@ orientate_tarkov_client("EscapeFromTarkov", logger)
 
 
 def snipe_main():
-
     while 1:
         this_item = random.choice(data_list)
         print("\n-----------------------------------------")
@@ -31,7 +30,7 @@ def snipe_main():
         get_to_flea_tab(logger, print_mode=False)
 
         # reset existing filters
-        reset_filters(logger,print_mode=False)
+        reset_filters(logger, print_mode=False)
 
         # search for name
         search_for_item(item_name)

@@ -200,7 +200,7 @@ def buy_this_offer(logger):
         pyautogui.press("y")
         print("Bought an item")
         print(f"Bought {logger.snipes} items")
-        time.sleep(6)
+        time.sleep(7)
 
 
 def reset_filters(logger, print_mode):
