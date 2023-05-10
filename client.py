@@ -122,7 +122,7 @@ def check_filters_window_orientation():
 
 
 def set_flea_filters(logger, price, print_mode):
-    operation_delay = 0.25
+    operation_delay = 0.15
 
     if print_mode:
         logger.change_status("Setting the flea filters for price undercut recognition")

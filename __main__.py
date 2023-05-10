@@ -1,7 +1,6 @@
 import random
 from client import (
     buy_this_offer,
-    check_if_offer_exists,
     get_to_flea_tab,
     orientate_tarkov_client,
     reset_filters,
