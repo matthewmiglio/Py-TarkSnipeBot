@@ -12,7 +12,7 @@ def show_help_gui():
     layout = [
         [sg.Text(out_text)],
     ]
-    window = sg.Window("Py-TarkBot", layout)
+    window = sg.Window("Py-Tark-Hideout-Bot", layout)
     while True:
         read = window.read()
         event, _ = read or (None, None)

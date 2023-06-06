@@ -2,18 +2,9 @@ import PySimpleGUI as sg
 
 from .stats import stat_box, stats
 
-info_text = """1. Tarkov must be set to windowed mode
-2. Program must be run as administrator.
-3. Crafts must be favorited in their respective stations
-4. Hideout lights must be set on using the fluorescent lights
+info_text = """No info text yet"""
 
-Matthew Miglio, Martin Miglio - Nov 2022"""
-
-instructions_text = """The bot farms crafts for lavatory,
-water collector, bitcoin farm, medstation, and workbench.
-
-The bot farms cordura, purified water, bitcoins, pile of meds, and green gunpowder. Favorite these crafts in each station.
-"""
+instructions_text = """No instructions text yet"""
 
 # defining various things that r gonna be in the gui.
 main_layout = [
@@ -41,30 +32,6 @@ main_layout = [
                     sg.Text("'Bitcoin' Farming"),
                     sg.Checkbox("", key="bitcoin_checkbox", default=True),
                 ],
-                [
-                    sg.Text("Lavatory 'Cordura' Farming"),
-                    sg.Checkbox("", key="lavatory_checkbox", default=True),
-                ],
-                [
-                    sg.Text("Medstation 'Pile of Meds' Farming"),
-                    sg.Checkbox("", key="medstation_checkbox", default=True),
-                ],
-                [
-                    sg.Text("'Purified Water' Farming"),
-                    sg.Checkbox("", key="water_checkbox", default=True),
-                ],
-                [
-                    sg.Text("Workbench 'Green Gunpowder' Farming"),
-                    sg.Checkbox("", key="workbench_checkbox", default=True),
-                ],
-                [
-                    sg.Text("Scav Case Farming"),
-                    sg.Checkbox("", key="scav_case_checkbox", default=True),
-                ],
-                [
-                    sg.Text("Scav Case Type"),
-                    sg.DropDown(['Moonshine', 'Intel', '95000', '15000', '2500'], default_value='2500', key='scav_case_type')
-                ]
             ],
             title="Job List",
             relief=sg.RELIEF_SUNKEN,
@@ -134,13 +101,6 @@ user_config_keys = [
     # "rows_to_target",
     # "remove_offers_timer",
     "autostart",
-    'bitcoin_checkbox',
-    'lavatory_checkbox',
-    'medstation_checkbox',
-    'water_checkbox',
-    'workbench_checkbox',
-    'scav_case_checkbox',
-    'scav_case_type',
 ]
 
 # list of button and checkbox keys to disable when the bot is running

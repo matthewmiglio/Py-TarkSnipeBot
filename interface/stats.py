@@ -18,51 +18,12 @@ def stat_box(stat_name: str, size=(5, 1)):
 stats_title = [
     [
         [
-            sg.Text("Workbench Starts: "),
-        ],
-        [
-            sg.Text("Workbench Collects"),
-        ],
-        [
-            sg.Text("Bitcoin Collects"),
-        ],
-        [
-            sg.Text("Lavatory Starts"),
-        ],
-        [
-            sg.Text("Lavatory Collects"),
-        ],
-        [
-            sg.Text("Scav Case Starts"),
-        ],
-        [
-            sg.Text("Scav Case Collects"),
-        ],
-        [
-            sg.Text("Est Profit"),
+            sg.Text("Program Restarts: "),
         ],
     ],
     [
         [
-            sg.Text("Medstation Starts"),
-        ],
-        [
-            sg.Text("Medstation Collects"),
-        ],
-        [
-            sg.Text("Water Filters"),
-        ],
-        [
-            sg.Text("Water Collects"),
-        ],
-        [
-            sg.Text("Restarts"),
-        ],
-        [
-            sg.Text("Est Time Per Station"),
-        ],
-        [
-            sg.Text("Autorestarts"),
+            sg.Text("Item Snipes"),
         ],
     ],
 ]
@@ -71,51 +32,12 @@ stats_title = [
 stats_values = [
     [
         [
-            stat_box("workbench_starts"),
-        ],
-        [
-            stat_box("workbench_collects"),
-        ],
-        [
-            stat_box("bitcoin_collects"),
-        ],
-        [
-            stat_box("lavatory_starts"),
-        ],
-        [
-            stat_box("lavatory_collects"),
-        ],
-        [
-            stat_box("scav_case_starts"),
-        ],
-        [
-            stat_box("scav_case_collects"),
-        ],
-        [
-            stat_box("profit", size=(10, 1)),
+            stat_box("restarts"),
         ],
     ],
     [
         [
-            stat_box("medstation_starts"),
-        ],
-        [
-            stat_box("medstation_collects"),
-        ],
-        [
-            stat_box("water_filters"),
-        ],
-        [
-            stat_box("water_collects"),
-        ],
-        [
-            stat_box("restarts"),
-        ],
-        [
-            stat_box("station_time"),
-        ],
-        [
-            stat_box("autorestarts"),
+            stat_box("snipes"),
         ],
     ],
 ]

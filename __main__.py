@@ -1,5 +1,4 @@
 import random
-from bot.data_list import data_list
 import time
 import webbrowser
 from queue import Queue
@@ -8,10 +7,12 @@ import PySimpleGUI as sg
 from bot.client import (
     buy_this_offer,
     get_to_flea_tab,
+    orientate_launcher,
     reset_filters,
     search_for_item,
     set_flea_filters,
 )
+from states import state_tree
 from utils.logger import Logger
 
 from utils.caching import cache_user_settings, check_user_settings, read_user_settings
@@ -66,24 +67,9 @@ def start_button_event(logger: Logger, window, values):
 
     # unpack job list
     jobs = []
-    if values["bitcoin_checkbox"]:
-        jobs.append("Bitcoin")
 
-    if values["lavatory_checkbox"]:
-        jobs.append("Lavatory")
-
-    if values["medstation_checkbox"]:
-        jobs.append("medstation")
-
-    if values["water_checkbox"]:
-        jobs.append("water")
-
-    if values["workbench_checkbox"]:
-        jobs.append("Workbench")
-
-    if values["scav_case_checkbox"]:
-        jobs.append("scav_case")
-        jobs.append(values["scav_case_type"])
+    # if values["bitcoin_checkbox"]:
+    #     jobs.append("Bitcoin")
 
     # setup thread and start it
     print("jobs: ", jobs)
@@ -112,12 +98,12 @@ class WorkerThread(StoppableThread):
         try:
             jobs = self.args
 
-            state = "start"
+            state = "restart"
 
             # loop until shutdown flag is set
             while not self.shutdown_flag.is_set():
                 # CODE TO RUN
-                snipe_main(self.logger)
+                state = state_tree(state, self.logger, jobs)
 
         except ThreadKilled:
             return
@@ -125,41 +111,6 @@ class WorkerThread(StoppableThread):
         except Exception as exc:  # pylint: disable=broad-except
             # catch exceptions and log to not crash the main thread
             self.logger.error(str(exc))
-
-
-def snipe_main(logger):
-    while 1:
-        prev_item_name = ""
-
-        # pick random item
-        this_item = random.choice(data_list)
-        print("\n-----------------------------------------")
-
-        # unpack name and price from tuple
-        item_name = this_item[0]
-        if item_name == prev_item_name:
-            continue
-        else:
-            prev_item_name = item_name
-        item_price = this_item[1] - 100
-
-        print(f"Looking for {item_name} offers below {item_price}")
-
-        # get to flea
-        get_to_flea_tab(logger, print_mode=False)
-
-        # reset existing filters
-        reset_filters(logger, print_mode=False)
-
-        # search for name
-        search_for_item(item_name)
-
-        # apply filters for this item
-        set_flea_filters(logger, item_price, print_mode=False)
-        time.sleep(2)
-
-        # if offer exists, buy, else continue
-        buy_this_offer(logger)
 
 
 def main():
@@ -207,7 +158,7 @@ def main():
 
             # if NO JOBS
             if False:  # CONDITIONS TO CHECK FOR NO JOBS
-                print("There are no jobs!")
+                logger.log("There are no jobs!")
 
             # if job list is good, start the worker thread
             else:
@@ -223,7 +174,7 @@ def main():
 
         elif event == "Help":
             # show_help_gui()
-            print("help button event")
+            logger.log("help button event")
 
         elif event == "Donate":
             webbrowser.open(
@@ -252,6 +203,14 @@ def main():
     shutdown_thread(thread, kill=True)
 
     window.close()
+
+
+def dummy_main():
+    # orientate_launcher()
+    state = state_tree("restart", Logger(), [])
+    print(state)
+
+# dummy_main()
 
 
 if __name__ == "__main__":

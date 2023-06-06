@@ -53,7 +53,7 @@ def get_to_wishlist(logger):
         pyautogui.click()
         time.sleep(0.5)
         at_wishlist=check_if_on_wishlist()
-    logger.change_status("Made it to wishlist.")
+    logger.log("Made it to wishlist.")
     
 
 def check_if_on_wishlist():
@@ -76,7 +76,7 @@ def get_to_flee_tab(logger):
     on_flee = check_if_on_flee_page()
     loops = 0
     while not (on_flee):
-        logger.change_status("Didnt find flea tab. Clicking flea tab.")
+        logger.log("Didnt find flea tab. Clicking flea tab.")
         if loops > 10:
             return "restart"
         loops = loops + 1
@@ -85,7 +85,7 @@ def get_to_flee_tab(logger):
         click(829, 977)
         time.sleep(2)
         on_flee = check_if_on_flee_page()
-    logger.change_status("Made it to flea tab.")
+    logger.log("Made it to flea tab.")
 
 
 def check_if_on_flee_page():
@@ -141,7 +141,7 @@ def orientate_filters_window(logger):
     
     is_orientated = check_filters_window_orientation()
     while not (is_orientated):
-        logger.change_status("Orientating filters window.")
+        logger.log("Orientating filters window.")
         coords = find_filters_window()
         if coords is not None:
             pyautogui.moveTo(coords[0], coords[1], duration=0.33)
@@ -149,7 +149,7 @@ def orientate_filters_window(logger):
             pyautogui.dragTo(3, 3, duration=0.33)
             time.sleep(0.33)
         is_orientated = check_filters_window_orientation()
-    logger.change_status("Orientated filters window.")
+    logger.log("Orientated filters window.")
 
 
 def check_filters_window_orientation():
@@ -234,7 +234,7 @@ def snipe_item(logger,item,price,quantity):
 
     #get to flea tab
     check_quit_key_press()
-    logger.change_status("Getting to flea")
+    logger.log("Getting to flea")
     get_to_flee_tab(logger)
     time.sleep(1)
     
@@ -242,12 +242,12 @@ def snipe_item(logger,item,price,quantity):
     get_to_wishlist(logger)
     
     #refresh the page
-    logger.change_status("Refreshing page")
+    logger.log("Refreshing page")
     pyautogui.press('f5')
     time.sleep(3)
     
     #open filters tab
-    logger.change_status("Setting filters.")
+    logger.log("Setting filters.")
     open_filters_window(logger)
     time.sleep(1)
     
@@ -262,7 +262,7 @@ def snipe_item(logger,item,price,quantity):
     time.sleep(1)
 
     #set filters
-    logger.change_status("Setting filters.")
+    logger.log("Setting filters.")
     set_filters(roubles=price)
     time.sleep(1)
     
@@ -275,7 +275,7 @@ def snipe_item(logger,item,price,quantity):
     
 def reset_filters(logger):
     check_quit_key_press()
-    logger.change_status("Resetting filters")
+    logger.log("Resetting filters")
     pyautogui.moveTo(186,275)
     pyautogui.click()
     time.sleep(0.5)
@@ -322,11 +322,11 @@ def set_filters(roubles=0):
 
 
 def get_to_browse_tab(logger):
-    logger.change_status('Getting to browse tab')
+    logger.log('Getting to browse tab')
     while not check_if_on_browse_tab():
         click(77,86)
         time.sleep(0.5)
-    logger.change_status('Done getting to browse tab')
+    logger.log('Done getting to browse tab')
     
 
 def check_if_on_browse_tab():

@@ -1,7 +1,6 @@
-import sys
+import pythoncom
 import time
 
-import keyboard
 import numpy
 import pyautogui
 import pygetwindow
@@ -10,13 +9,16 @@ import win32gui
 from matplotlib import pyplot as plt
 from screeninfo import get_monitors
 
-from utils.image_rec import find_references, get_first_location, make_reference_image_list
-
+from utils.image_rec import (
+    find_references,
+    get_first_location,
+    make_reference_image_list,
+)
 
 
 def get_to_flea_tab(logger, print_mode=True):
     if print_mode:
-        logger.change_status("Getting to flea tab")
+        logger.log("Getting to flea tab")
     on_flea = check_if_on_flea_page()
     loops = 0
     while not on_flea:
@@ -28,7 +30,7 @@ def get_to_flea_tab(logger, print_mode=True):
         time.sleep(0.17)
         on_flea = check_if_on_flea_page()
     if print_mode:
-        logger.change_status("Made it to flea tab.")
+        logger.log("Made it to flea tab.")
 
 
 def check_if_on_flea_page():
@@ -81,9 +83,9 @@ def orientate_filters_window(logger, print_mode=True):
     while not is_orientated:
         loops += 1
         if loops > 10:
-            open_filters_window(logger,print_mode)
+            open_filters_window(logger, print_mode)
         if print_mode:
-            logger.change_status("Orientating filters window.")
+            logger.log("Orientating filters window.")
         coords = find_filters_window()
         if coords is not None:
             origin = pyautogui.position()
@@ -94,7 +96,7 @@ def orientate_filters_window(logger, print_mode=True):
             time.sleep(0.33)
         is_orientated = check_filters_window_orientation()
     if print_mode:
-        logger.change_status("Orientated filters window.")
+        logger.log("Orientated filters window.")
 
 
 def find_filters_window():
@@ -126,17 +128,17 @@ def set_flea_filters(logger, price, print_mode):
     operation_delay = 0.15
 
     if print_mode:
-        logger.change_status("Setting the flea filters for price undercut recognition")
+        logger.log("Setting the flea filters for price undercut recognition")
 
     # open filter window
     if print_mode:
-        logger.change_status("Opening the filters window")
+        logger.log("Opening the filters window")
     open_filters_window(logger, print_mode)
     time.sleep(operation_delay)
 
     # click currency dropdown
     if print_mode:
-        logger.change_status("Filtering by roubles.")
+        logger.log("Filtering by roubles.")
     click(113, 62)
     time.sleep(operation_delay)
 
@@ -146,7 +148,7 @@ def set_flea_filters(logger, price, print_mode):
 
     # click 'display offers from' dropdown
     if print_mode:
-        logger.change_status("Filtering by player sales only.")
+        logger.log("Filtering by player sales only.")
     click(171, 188)
     time.sleep(operation_delay)
 
@@ -172,7 +174,7 @@ def set_flea_filters(logger, price, print_mode):
 
     # click OK
     if print_mode:
-        logger.change_status("Clicking OK in filters tab.")
+        logger.log("Clicking OK in filters tab.")
     click(83, 272)
     time.sleep(operation_delay)
 
@@ -199,8 +201,8 @@ def buy_this_offer(logger):
         click(1186, 152)
         time.sleep(0.33)
         pyautogui.press("y")
-        print("Bought an item")
-        print(f"Bought {logger.snipes} items")
+        logger.log("Bought an item")
+        logger.log(f"Bought {logger.snipes} items")
         time.sleep(7)
 
 
@@ -239,7 +241,6 @@ def orientate_terminal():
         time.sleep(0.33)
     except BaseException:
         pass
-        # print("Couldn't orientate terminal using name 'SnipeBot'")
 
     try:
         terminal_window = pygetwindow.getWindowsWithTitle("__main__.py")[0]
@@ -263,16 +264,15 @@ def orientate_terminal():
         time.sleep(0.33)
     except BaseException:
         pass
-        # print("Couldn't orientate terminal using name '__main__.py'")
 
 
 def close_tarkov_client(logger, tark_window):
     try:
-        logger.change_status("Closing Tarkov")
+        logger.log("Closing Tarkov")
         tark_window = tark_window[0]
         tark_window.close()
     except BaseException:
-        print("error closing tarkov client.")
+        logger.log("error closing tarkov client.")
 
 
 def show_image(image):
@@ -281,7 +281,7 @@ def show_image(image):
 
 
 def close_launcher(logger, tark_launcher):
-    logger.change_status("Closing Tarkov launcher")
+    logger.log("Closing Tarkov launcher")
     tark_launcher = tark_launcher[0]
     tark_launcher.close()
 
@@ -296,7 +296,7 @@ def move_window_to_top_left(window_name):
 
 
 def orientate_tarkov_client(title, logger):
-    logger.change_status("Orientating tarkov client.")
+    logger.log("Orientating tarkov client.")
 
     # change res
     resize = [1299, 999]
@@ -310,27 +310,33 @@ def orientate_tarkov_client(title, logger):
 def orientate_launcher():
     resize = [1100, 600]
     title = "BsgLauncher"
+    print("Resizing launcher")
     resize_window(window_name=title, resize=resize)
+    print("Done resizing launcher")
     time.sleep(1)
+    print("Moving launcher to top left")
     move_window(window_name=title, coord=[0, 0])
+    print("Done moving launcher to top left")
     time.sleep(1)
 
 
 def resize_window(window_name, resize):
-    # windown name gotta be a string
-    # resize gotta be a 1x2 ar like [width,height]
-    title = window_name  # find first window with this title
-    top_windows = []  # all open windows
+    # Window name has to be a string
+    # Resize has to be a 1x2 array like [width, height]
+    pythoncom.CoInitialize()  # Initialize COM
+
+    title = window_name  # Find first window with this title
+    top_windows = []  # All open windows
     win32gui.EnumWindows(window_enumeration_handler, top_windows)
 
-    winlst = []  # windows to cycle through
-    for i in top_windows:  # all open windows
+    winlst = []  # Windows to cycle through
+    for i in top_windows:  # All open windows
         if i[1] == title:
             winlst.append(i)
 
-    hwnd = winlst[0][0]  # first window with title, get hwnd id
-    shell = win32.Dispatch("WScript.Shell")  # set focus on desktop
-    shell.SendKeys("%")  # Alt key,  send key
+    hwnd = winlst[0][0]  # First window with title, get hwnd id
+    shell = win32.Dispatch("WScript.Shell")  # Set focus on desktop
+    shell.SendKeys("%")  # Alt key, send key
     x0, y0, x1, y1 = win32gui.GetWindowRect(hwnd)
 
     win32gui.MoveWindow(hwnd, x0, y0, resize[0], resize[1], True)

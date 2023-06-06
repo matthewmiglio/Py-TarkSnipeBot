@@ -23,7 +23,7 @@ class Logger:
         # message stats
         self.message = ""
 
-        #program stats
+        # program stats
         self.errored = False
 
     def _update_queue(self):
@@ -32,7 +32,9 @@ class Logger:
             return
 
         statistics: dict[str, str | int] = {
-            # "workbench_starts": self.workbench_starts,
+            "restarts": self.restarts,
+            "snipes": self.snipes,
+            "message": self.message,
         }
         self.queue.put(statistics)
 
@@ -47,6 +49,14 @@ class Logger:
             return result
 
         return wrapper
+
+    @_updates_queue
+    def add_restart(self):
+        self.restarts += 1
+
+    @_updates_queue
+    def add_snipe(self):
+        self.snipes += 1
 
     @_updates_queue
     def error(self, message: str):
