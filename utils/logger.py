@@ -114,8 +114,6 @@ class Logger:
     def add_restart(self):
         """add restart to log"""
         self.restarts += 1
-        self.print_new_terminal()
 
     def add_snipe(self):
         self.snipes = self.snipes + 1
-        self.print_new_terminal()

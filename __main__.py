@@ -206,9 +206,41 @@ def main():
 
 
 def dummy_main():
+    from bot.client import orientate_tarkov_client
+    from bot.client import click
+    import pyautogui
+
+    # orientate_tarkov_client()
     # orientate_launcher()
-    state = state_tree("restart", Logger(), [])
-    print(state)
+    # state = state_tree("restart", Logger(), [])
+    # print(state)
+
+    pass
+
+    # buy_this_offer(logger)
+
+    # logger = Logger()
+    # logger.add_snipe()
+
+    # # click purchase
+    # click(1186, 152)
+    # time.sleep(0.33)
+
+    # # click all
+    # click(773, 475)
+    # time.sleep(0.33)
+
+    # # press y to buy it
+    # pyautogui.press("y")
+
+    # logger.log("Bought an item")
+    # logger.log(f"Bought {logger.snipes} items")
+
+    # # sleep to avoid captcha
+    # time.sleep(7)
+
+    
+
 
 # dummy_main()
 

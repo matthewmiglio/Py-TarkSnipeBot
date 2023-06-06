@@ -18,7 +18,7 @@ def state_tree(state, logger, jobs):
         state = "snipe"
 
     if state == "snipe":
-        state = snipe_state()
+        state = snipe_state(logger)
 
     return state
 
@@ -46,6 +46,7 @@ def snipe_state(logger):
 
     # get to flea
     if get_to_flea_tab(logger, print_mode=False) == "restart":
+        logger.log(f"#235987 Failure with getting to flea tab")
         return "restart"
 
     # reset existing filters

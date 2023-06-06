@@ -23,6 +23,7 @@ def get_to_flea_tab(logger, print_mode=True):
     loops = 0
     while not on_flea:
         if loops > 20:
+            print("#92537982735 Failure with get_to_flea_tab()")
             return "restart"
         loops = loops + 1
 
@@ -197,12 +198,22 @@ def check_if_offer_exists():
 
 def buy_this_offer(logger):
     if check_if_offer_exists():
-        logger.add_snipe()
+        # click purchase
         click(1186, 152)
         time.sleep(0.33)
+
+        # click all
+        click(773, 475)
+        time.sleep(0.33)
+
+        # press y to buy it
         pyautogui.press("y")
+
         logger.log("Bought an item")
         logger.log(f"Bought {logger.snipes} items")
+        logger.add_snipe()
+
+        # sleep to avoid captcha
         time.sleep(7)
 
 
@@ -295,16 +306,10 @@ def move_window_to_top_left(window_name):
     window.moveTo(0, 0)
 
 
-def orientate_tarkov_client(title, logger):
-    logger.log("Orientating tarkov client.")
-
-    # change res
-    resize = [1299, 999]
-    resize_window(window_name=title, resize=resize)
-
-    # move window to top left
-    move_window_to_top_left("EscapeFromTarkov")
-    time.sleep(1)
+def orientate_tarkov_client():
+    tark_window = pygetwindow.getWindowsWithTitle("EscapeFromTarkov")[0]
+    tark_window.moveTo(0, 0)
+    tark_window.resizeTo(1299, 999)
 
 
 def orientate_launcher():

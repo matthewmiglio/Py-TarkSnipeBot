@@ -144,6 +144,7 @@ def wait_for_tarkov_to_open(logger):
         time.sleep(2)
         tark_window = pygetwindow.getWindowsWithTitle("EscapeFromTarkov")
         if loops > 50:
+            logger.log('#8927592 Failure within restart state')
             return "restart"
 
 
@@ -156,6 +157,7 @@ def wait_for_tark_main(logger):
         time.sleep(2)
         on_main = check_if_on_tark_main()
         if loops > 120:
+            logger.log('#87639485 Failure waiting for tark main within restart state')
             return "restart"
 
 
@@ -199,7 +201,7 @@ def check_if_play_button_exists_in_launcher():
 def wait_for_play_button_in_launcher(logger):
     if len(pygetwindow.getWindowsWithTitle("BsgLauncher")) == 0:
         logger.log(
-            "Launcher not detected while waiting for play button in launcher."
+            "#575637 Launcher not detected while waiting for play button in launcher."
         )
         return "restart"
     loop = 0
@@ -210,6 +212,6 @@ def wait_for_play_button_in_launcher(logger):
         time.sleep(2)
         if loop > 50:
             logger.log(
-                "Spent too long waiting for launcher's play button. Restarting."
+                "#8568445 Spent too long waiting for launcher's play button. Restarting."
             )
             return "restart"
