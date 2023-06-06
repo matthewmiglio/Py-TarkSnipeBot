@@ -29,8 +29,8 @@ main_layout = [
         sg.Frame(
             layout=[
                 [
-                    sg.Text("'Bitcoin' Farming"),
-                    sg.Checkbox("", key="bitcoin_checkbox", default=True),
+                    sg.Text("'Random Checkbox'"),
+                    sg.Checkbox("", key="checkbox_1", default=True),
                 ],
             ],
             title="Job List",
