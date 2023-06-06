@@ -1,3 +1,6 @@
+from functools import wraps
+from queue import Queue
+
 import time
 from queue import Queue
 
@@ -8,19 +11,64 @@ class Logger:
     def __init__(self, queue=None, timed=True):
         """Logger init"""
         self.queue: Queue[dict[str, str | int]] = Queue() if queue is None else queue
-        
-        
-        
-        
-        self.start_time = time.time()
+
+        # time stats
+        self.start_time = time.time() if timed else None
+        self.time_since_start = 0
+
+        # bot stats
         self.restarts = 0
         self.snipes = 0
 
-        self.current_status = ""
+        # message stats
+        self.message = ""
 
-
+        #program stats
         self.errored = False
 
+    def _update_queue(self):
+        """updates the queue with a dictionary of mutable statistics"""
+        if self.queue is None:
+            return
+
+        statistics: dict[str, str | int] = {
+            # "workbench_starts": self.workbench_starts,
+        }
+        self.queue.put(statistics)
+
+    @staticmethod
+    def _updates_queue(func):
+        """decorator to specify functions which update the queue with statistics"""
+
+        @wraps(func)
+        def wrapper(self, *args, **kwargs):
+            result = func(self, *args, **kwargs)
+            self._update_queue()  # pylint: disable=protected-access
+            return result
+
+        return wrapper
+
+    @_updates_queue
+    def error(self, message: str):
+        """logs an error"""
+        self.errored = True
+        self.status = f"Error: {message}"
+        print(f"Error: {message}")
+
+    def calc_time_since_start(self) -> str:
+        if self.start_time is not None:
+            hours, remainder = divmod(time.time() - self.start_time, 3600)
+            minutes, seconds = divmod(remainder, 60)
+        else:
+            hours, minutes, seconds = 0, 0, 0
+        return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
+
+    @_updates_queue
+    def log(self, string):
+        self.message = string
+        self.time_since_start = self.calc_time_since_start()
+
+        print(f"[{self.time_since_start}] {string}")
 
     def make_timestamp(self):
         """creates a time stamp for log output
@@ -53,10 +101,6 @@ class Logger:
         seconds %= 60
         return "%d:%02d:%02d" % (hour, minutes, seconds)
 
-    def change_status(self, status):
-        self.current_status = status
-        self.print_new_terminal()
-
     def add_restart(self):
         """add restart to log"""
         self.restarts += 1
@@ -65,6 +109,3 @@ class Logger:
     def add_snipe(self):
         self.snipes = self.snipes + 1
         self.print_new_terminal()
-
-    def print_new_terminal(self):
-        print(self.current_status)

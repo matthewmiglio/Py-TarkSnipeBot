@@ -1,8 +1,17 @@
+import random
+from bot.data_list import data_list
 import time
 import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
+from bot.client import (
+    buy_this_offer,
+    get_to_flea_tab,
+    reset_filters,
+    search_for_item,
+    set_flea_filters,
+)
 from utils.logger import Logger
 
 from utils.caching import cache_user_settings, check_user_settings, read_user_settings
@@ -108,7 +117,7 @@ class WorkerThread(StoppableThread):
             # loop until shutdown flag is set
             while not self.shutdown_flag.is_set():
                 # CODE TO RUN
-                pass
+                snipe_main(self.logger)
 
         except ThreadKilled:
             return
@@ -116,6 +125,41 @@ class WorkerThread(StoppableThread):
         except Exception as exc:  # pylint: disable=broad-except
             # catch exceptions and log to not crash the main thread
             self.logger.error(str(exc))
+
+
+def snipe_main(logger):
+    while 1:
+        prev_item_name = ""
+
+        # pick random item
+        this_item = random.choice(data_list)
+        print("\n-----------------------------------------")
+
+        # unpack name and price from tuple
+        item_name = this_item[0]
+        if item_name == prev_item_name:
+            continue
+        else:
+            prev_item_name = item_name
+        item_price = this_item[1] - 100
+
+        print(f"Looking for {item_name} offers below {item_price}")
+
+        # get to flea
+        get_to_flea_tab(logger, print_mode=False)
+
+        # reset existing filters
+        reset_filters(logger, print_mode=False)
+
+        # search for name
+        search_for_item(item_name)
+
+        # apply filters for this item
+        set_flea_filters(logger, item_price, print_mode=False)
+        time.sleep(2)
+
+        # if offer exists, buy, else continue
+        buy_this_offer(logger)
 
 
 def main():
@@ -209,16 +253,6 @@ def main():
 
     window.close()
 
-
-def dummy_main():
-    # from hideoutbot.bot.client import orientate_tarkov_client
-
-    # orientate_tarkov_client()
-
-    pass
-
-
-# dummy_main()
 
 if __name__ == "__main__":
     main()

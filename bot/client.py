@@ -10,7 +10,8 @@ import win32gui
 from matplotlib import pyplot as plt
 from screeninfo import get_monitors
 
-from image_rec import find_references, get_first_location, make_reference_image_list
+from utils.image_rec import find_references, get_first_location, make_reference_image_list
+
 
 
 def get_to_flea_tab(logger, print_mode=True):
