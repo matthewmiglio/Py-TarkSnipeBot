@@ -1,16 +1,26 @@
 import time
+from queue import Queue
 
 
 class Logger:
     """Handles creating and reading logs"""
 
-    def __init__(self):
+    def __init__(self, queue=None, timed=True):
         """Logger init"""
+        self.queue: Queue[dict[str, str | int]] = Queue() if queue is None else queue
+        
+        
+        
+        
         self.start_time = time.time()
         self.restarts = 0
         self.snipes = 0
 
         self.current_status = ""
+
+
+        self.errored = False
+
 
     def make_timestamp(self):
         """creates a time stamp for log output

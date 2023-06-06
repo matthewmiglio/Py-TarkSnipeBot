@@ -1,4 +1,4 @@
-from client import check_if_offer_exists, orientate_tarkov_client
+from bot.client import check_if_offer_exists, orientate_tarkov_client
 from configuration import load_user_config
 from logger import Logger
 
