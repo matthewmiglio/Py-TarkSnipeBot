@@ -4,14 +4,8 @@ import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
-from bot.client import (
-    buy_this_offer,
-    get_to_flea_tab,
-    orientate_launcher,
-    reset_filters,
-    search_for_item,
-    set_flea_filters,
-)
+from bot.client import check_for_search_results
+
 from states import state_tree
 from utils.logger import Logger
 
@@ -164,7 +158,7 @@ def main():
     logger = Logger(comm_queue, timed=False)  # dont time the inital logger
 
     # window layout
-    window = sg.Window("Py-TarkBot", main_layout)
+    window = sg.Window("Py-Tark-Snipe-Bot", main_layout)
 
     load_last_settings(window)
 
@@ -258,33 +252,15 @@ def dummy_main():
     # state = state_tree("restart", Logger(), [])
     # print(state)
 
+    while 1:print(check_for_search_results())
+
     pass
 
-    # buy_this_offer(logger)
-
-    # logger = Logger()
-    # logger.add_snipe()
-
-    # # click purchase
-    # click(1186, 152)
-    # time.sleep(0.33)
-
-    # # click all
-    # click(773, 475)
-    # time.sleep(0.33)
-
-    # # press y to buy it
-    # pyautogui.press("y")
-
-    # logger.log("Bought an item")
-    # logger.log(f"Bought {logger.snipes} items")
-
-    # # sleep to avoid captcha
-    # time.sleep(7)
 
 
-# dummy_main()
+
+dummy_main()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

@@ -55,7 +55,9 @@ def item_snipe_main(logger, snipe_data):
         reset_filters(logger, print_mode=False)
 
         # search for name
-        search_for_item(item_name)
+        if search_for_item(item_name) == "no results":
+            logger.log(f"no results for {item_name}")
+            continue
 
         # apply filters for this item
         set_flea_filters(logger, item_price, print_mode=False)
@@ -81,8 +83,9 @@ def restart_state(logger):
 
 
 def ruble_snipe_main(logger):
-    # loop 3 times, then run state_tree again
-    for loop_index in range(3):
+    LOOP_PER_STATE = 6
+    # loop LOOP_PER_STATE times, then run state_tree again
+    for loop_index in range(LOOP_PER_STATE):
         logger.log(f"Starting ruble snipe loop {loop_index}")
 
         # pick random item
@@ -103,7 +106,9 @@ def ruble_snipe_main(logger):
         reset_filters(logger, print_mode=False)
 
         # search for name
-        search_for_item(item_name)
+        if search_for_item(item_name) == "no results":
+            logger.log(f"no results for {item_name}")
+            continue
 
         # apply filters for this item
         set_flea_filters(logger, item_price, print_mode=False)

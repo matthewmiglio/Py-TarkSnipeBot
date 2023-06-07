@@ -65,11 +65,24 @@ def search_for_item(name):
     pyautogui.typewrite(name)
     time.sleep(4)
 
+    # check if any search results appeared
+    if not check_for_search_results():
+        return 'no results'
+
     # click item in search results page
     click(134, 142)
 
     # wait
     time.sleep(1)
+
+
+def check_for_search_results():
+    iar = numpy.asarray(screenshot())
+    for x in range(60, 110):
+        this_pixel = iar[138][x]
+        if pixel_is_equal([211, 210, 199], this_pixel, tol=20):
+            return True
+    return False
 
 
 def open_filters_window(logger, print_mode):
