@@ -68,8 +68,51 @@ def start_button_event(logger: Logger, window, values):
     # unpack job list
     jobs = []
 
-    # if values["bitcoin_checkbox"]:
-    #     jobs.append("Bitcoin")
+    # if rouble sniping toggle activated, add it to job list
+    if values["ruble_sniping_toggle"]:
+        jobs.append("ruble_sniping")
+    else:
+        jobs.append("null")
+
+    # if item sniping toggle activated, add it to job list, unpack item list and add to job list
+    if values["item_sniping_toggle"]:
+        # add item sniping to job list
+        jobs.append("item_sniping")
+
+        # unpack item list
+        item_names = [
+            values["item_name_1"],
+            values["item_name_2"],
+            values["item_name_3"],
+        ]
+
+        prices = [
+            values["item_price_1"],
+            values["item_price_2"],
+            values["item_price_3"],
+        ]
+
+        data_list = []
+
+        for index in range(len(item_names)):
+            this_name = item_names[index]
+            this_price = prices[index]
+
+            # skip null params
+            if (
+                this_name == ""
+                or this_price == ""
+                or this_name is None
+                or this_price is None
+                or this_name == " "
+                or this_price == " "
+            ):
+                continue
+
+            this_datum = [this_name, this_price]
+            data_list.append(this_datum)
+
+        jobs.append(data_list)
 
     # setup thread and start it
     print("jobs: ", jobs)
@@ -238,8 +281,6 @@ def dummy_main():
 
     # # sleep to avoid captcha
     # time.sleep(7)
-
-    
 
 
 # dummy_main()

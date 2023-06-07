@@ -13,14 +13,60 @@ from bot.launcher import restart_tarkov
 
 
 def state_tree(state, logger, jobs):
+    print(f"Jobs in state tree: {jobs}")
+
     if state == "restart":
         restart_state(logger)
-        state = "snipe"
+        state = "item_snipe"
 
-    if state == "snipe":
-        state = snipe_state(logger)
+    if state == "ruble_snipe":
+        if "ruble_sniping" in jobs:
+            state = ruble_snipe_main(logger)
+        else:
+            state = "item_snipe"
+
+    if state == "item_snipe":
+        if "item_sniping" in jobs:
+            state = item_snipe_main(logger, jobs[2])
+        else:
+            state = "ruble_snipe"
 
     return state
+
+
+def item_snipe_main(logger, snipe_data):
+    # for each item in snipe_data, check for snipe
+
+    item_index = 0
+    for item in snipe_data:
+        item_name = item[0]
+        item_price = item[1]
+
+        logger.log(
+            f"Looking for {item_index}th item: [{item_name}] w/ offers below {item_price}"
+        )
+
+        # get to flea
+        if get_to_flea_tab(logger, print_mode=False) == "restart":
+            logger.log(f"#8435683 Failure with getting to flea tab")
+            return "restart"
+
+        # reset existing filters
+        reset_filters(logger, print_mode=False)
+
+        # search for name
+        search_for_item(item_name)
+
+        # apply filters for this item
+        set_flea_filters(logger, item_price, print_mode=False)
+        time.sleep(2)
+
+        # if offer exists, buy, else continue
+        buy_this_offer(logger)
+
+        item_index += 1
+
+    return "ruble_snipe"
 
 
 def restart_state(logger):
@@ -34,32 +80,36 @@ def restart_state(logger):
     pass
 
 
-def snipe_state(logger):
-    # pick random item
-    this_item = random.choice(data_list)
+def ruble_snipe_main(logger):
+    # loop 3 times, then run state_tree again
+    for loop_index in range(3):
+        logger.log(f"Starting ruble snipe loop {loop_index}")
 
-    # unpack name and price from tuple
-    item_name = this_item[0]
-    item_price = this_item[1] - 100
+        # pick random item
+        this_item = random.choice(data_list)
 
-    logger.log(f"Looking for {item_name} offers below {item_price}")
+        # unpack name and price from tuple
+        item_name = this_item[0]
+        item_price = this_item[1] - 100
 
-    # get to flea
-    if get_to_flea_tab(logger, print_mode=False) == "restart":
-        logger.log(f"#235987 Failure with getting to flea tab")
-        return "restart"
+        logger.log(f"Looking for {item_name} offers below {item_price}")
 
-    # reset existing filters
-    reset_filters(logger, print_mode=False)
+        # get to flea
+        if get_to_flea_tab(logger, print_mode=False) == "restart":
+            logger.log(f"#235987 Failure with getting to flea tab")
+            return "restart"
 
-    # search for name
-    search_for_item(item_name)
+        # reset existing filters
+        reset_filters(logger, print_mode=False)
 
-    # apply filters for this item
-    set_flea_filters(logger, item_price, print_mode=False)
-    time.sleep(2)
+        # search for name
+        search_for_item(item_name)
 
-    # if offer exists, buy, else continue
-    buy_this_offer(logger)
+        # apply filters for this item
+        set_flea_filters(logger, item_price, print_mode=False)
+        time.sleep(2)
 
-    return "snipe"
+        # if offer exists, buy, else continue
+        buy_this_offer(logger)
+
+    return "item_snipe"

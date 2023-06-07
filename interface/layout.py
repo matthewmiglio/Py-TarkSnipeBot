@@ -25,15 +25,72 @@ main_layout = [
             expand_x=True,
         ),
     ],
+    # job checkboxes
     [
         sg.Frame(
             layout=[
                 [
-                    sg.Text("'Random Checkbox'"),
-                    sg.Checkbox("", key="checkbox_1", default=True),
+                    sg.Text("'Ruble sniping (Therapist Vendor)'"),
+                    sg.Checkbox("", key="ruble_sniping_toggle", default=True),
+                ],
+                [
+                    sg.Text("'Specific item sniping'"),
+                    sg.Checkbox("", key="item_sniping_toggle", default=True),
                 ],
             ],
             title="Job List",
+            relief=sg.RELIEF_SUNKEN,
+            expand_x=True,
+        ),
+    ],
+    # item sniping user input
+    [
+        sg.Frame(
+            layout=[
+                [
+                    sg.Text("Name #1"),
+                    sg.InputText("", key="item_name_1"),
+                ],
+                [
+                    sg.Text("Price #1"),
+                    sg.InputText("", key="item_price_1"),
+                ],
+            ],
+            title="Item 1 Snipe Settings",
+            relief=sg.RELIEF_SUNKEN,
+            expand_x=True,
+        ),
+    ],
+    [
+        sg.Frame(
+            layout=[
+                [
+                    sg.Text("Name #2"),
+                    sg.InputText("", key="item_name_2"),
+                ],
+                [
+                    sg.Text("Price #2"),
+                    sg.InputText("", key="item_price_2"),
+                ],
+            ],
+            title="Item 2 Snipe Settings",
+            relief=sg.RELIEF_SUNKEN,
+            expand_x=True,
+        ),
+    ],
+    [
+        sg.Frame(
+            layout=[
+                [
+                    sg.Text("Name #3"),
+                    sg.InputText("", key="item_name_3"),
+                ],
+                [
+                    sg.Text("Price #3"),
+                    sg.InputText("", key="item_price_3"),
+                ],
+            ],
+            title="Item 3 Snipe Settings",
             relief=sg.RELIEF_SUNKEN,
             expand_x=True,
         ),
@@ -101,6 +158,14 @@ user_config_keys = [
     # "rows_to_target",
     # "remove_offers_timer",
     "autostart",
+    "ruble_sniping_toggle",
+    "item_sniping_toggle",
+    "item_name_1",
+    "item_price_1",
+    "item_name_2",
+    "item_price_2",
+    "item_name_3",
+    "item_price_3",
 ]
 
 # list of button and checkbox keys to disable when the bot is running

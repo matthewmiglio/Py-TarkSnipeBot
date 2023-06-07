@@ -100,9 +100,9 @@ def restart_tarkov(logger):
     time.sleep(5)
 
     # orientate launcher
-    logger.log("#6365 Orientating launcher")
+    logger.log("Orientating launcher")
     orientate_launcher()
-    print('Done orientating launcher')
+    print("Done orientating launcher")
     time.sleep(3)
 
     # wait for launcher play button to appear
@@ -144,7 +144,7 @@ def wait_for_tarkov_to_open(logger):
         time.sleep(2)
         tark_window = pygetwindow.getWindowsWithTitle("EscapeFromTarkov")
         if loops > 50:
-            logger.log('#8927592 Failure within restart state')
+            logger.log("#8927592 Failure within restart state")
             return "restart"
 
 
@@ -157,7 +157,7 @@ def wait_for_tark_main(logger):
         time.sleep(2)
         on_main = check_if_on_tark_main()
         if loops > 120:
-            logger.log('#87639485 Failure waiting for tark main within restart state')
+            logger.log("#87639485 Failure waiting for tark main within restart state")
             return "restart"
 
 
