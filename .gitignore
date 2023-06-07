@@ -3,7 +3,7 @@ temp/
 output/
 build/
 wheelhouse/
-pytarkbot/cache/
+pytarksnipebot/cache/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
