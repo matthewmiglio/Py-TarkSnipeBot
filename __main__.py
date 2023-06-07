@@ -259,8 +259,8 @@ def dummy_main():
 
 
 
-dummy_main()
+# dummy_main()
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
