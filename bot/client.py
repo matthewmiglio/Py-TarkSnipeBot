@@ -67,7 +67,7 @@ def search_for_item(name):
 
     # check if any search results appeared
     if not check_for_search_results():
-        return 'no results'
+        return "no results"
 
     # click item in search results page
     click(134, 142)
@@ -82,6 +82,12 @@ def check_for_search_results():
         this_pixel = iar[138][x]
         if pixel_is_equal([211, 210, 199], this_pixel, tol=20):
             return True
+
+    for x in range(60, 130):
+        this_pixel = iar[142][x]
+        if pixel_is_equal([197, 195, 178], this_pixel, tol=20):
+            return True
+
     return False
 
 

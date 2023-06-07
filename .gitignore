@@ -12,6 +12,9 @@ __pycache__/
 # C extensions
 *.so
 
+#Adding this to test
+*.pcy
+
 # Distribution / packaging
 .Python
 build/
