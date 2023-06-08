@@ -23,7 +23,10 @@ stats_title = [
     ],
     [
         [
-            sg.Text("Item Snipes"),
+            sg.Text("Ruble Snipes"),
+        ],
+        [
+            sg.Text("Specific Snipes"),
         ],
     ],
 ]
@@ -37,7 +40,10 @@ stats_values = [
     ],
     [
         [
-            stat_box("snipes"),
+            stat_box("ruble_snipes"),
+        ],
+        [
+            stat_box("specific_snipes"),
         ],
     ],
 ]

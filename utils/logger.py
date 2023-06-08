@@ -18,7 +18,8 @@ class Logger:
 
         # bot stats
         self.restarts = 0
-        self.snipes = 0
+        self.ruble_snipes = 0
+        self.specific_snipes = 0
 
         # message stats
         self.message = ""
@@ -33,7 +34,8 @@ class Logger:
 
         statistics: dict[str, str | int] = {
             "restarts": self.restarts,
-            "snipes": self.snipes,
+            "ruble_snipes": self.ruble_snipes,
+            "specific_snipes": self.specific_snipes,
             "message": self.message,
         }
         self.queue.put(statistics)
@@ -115,5 +117,8 @@ class Logger:
         """add restart to log"""
         self.restarts += 1
 
-    def add_snipe(self):
-        self.snipes = self.snipes + 1
+    def add_ruble_snipe(self):
+        self.ruble_snipes += 1
+
+    def add_specific_snipe(self):
+        self.specific_snipes += 1

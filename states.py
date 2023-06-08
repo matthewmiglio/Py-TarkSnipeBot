@@ -64,6 +64,7 @@ def item_snipe_main(logger, snipe_data):
         time.sleep(2)
 
         # if offer exists, buy, else continue
+        logger.add_specific_snipe()
         buy_this_offer(logger)
 
         item_index += 1
@@ -115,6 +116,7 @@ def ruble_snipe_main(logger):
         time.sleep(2)
 
         # if offer exists, buy, else continue
+        logger.add_ruble_snipe()
         buy_this_offer(logger)
 
     return "item_snipe"

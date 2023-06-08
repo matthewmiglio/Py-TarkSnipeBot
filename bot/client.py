@@ -230,7 +230,6 @@ def buy_this_offer(logger):
 
         logger.log("Bought an item")
         logger.log(f"Bought {logger.snipes} items")
-        logger.add_snipe()
 
         # sleep to avoid captcha
         time.sleep(7)
