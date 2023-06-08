@@ -252,11 +252,10 @@ def dummy_main():
     # state = state_tree("restart", Logger(), [])
     # print(state)
 
-    while 1:print(check_for_search_results())
+    while 1:
+        print(check_for_search_results())
 
     pass
-
-
 
 
 # dummy_main()
