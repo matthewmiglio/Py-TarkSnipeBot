@@ -2,10 +2,18 @@ import PySimpleGUI as sg
 
 from .stats import stat_box, stats
 
-info_text = """No info text yet"""
+info_text = """Py-Tark-Snipe-Bot strategically handles Tarkov Flea Market purchases to profit Rubles while you're AFK. 
+Matthew Miglio, April 2023"""
 
-instructions_text = """No instructions text yet"""
+instructions_text = """1. Tarkov MUST be set to windowed mode.
+2. Program must be ran as administrator.
 
+Ruble Sniping Mode:
+-Buys underprices items from flea to sell to Therapist
+
+Specific Item Sniping Mode:
+-Buys a specific item from flea at a specific price
+"""
 # defining various things that r gonna be in the gui.
 main_layout = [
     [
