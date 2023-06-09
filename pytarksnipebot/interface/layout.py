@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 from .stats import stat_box, stats
 
-info_text = """Py-Tark-Snipe-Bot strategically handles Tarkov Flea Market purchases to profit Rubles while you're AFK. 
+info_text = """Py-Tark-Snipe-Bot strategically handles Tarkov Flea Market purchases to profit Rubles while you're AFK.
 Matthew Miglio, April 2023"""
 
 instructions_text = """1. Tarkov MUST be set to windowed mode.

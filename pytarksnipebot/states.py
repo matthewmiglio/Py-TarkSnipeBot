@@ -1,15 +1,15 @@
+import random
 import time
-from bot.client import (
+
+from pytarksnipebot.bot.client import (
     buy_this_offer,
     get_to_flea_tab,
     reset_filters,
     search_for_item,
     set_flea_filters,
 )
-from bot.data_list import data_list
-
-import random
-from bot.launcher import restart_tarkov
+from pytarksnipebot.bot.data_list import data_list
+from pytarksnipebot.bot.launcher import restart_tarkov
 
 
 def state_tree(state, logger, jobs):

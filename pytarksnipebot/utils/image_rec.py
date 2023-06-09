@@ -1,7 +1,7 @@
 import multiprocessing
+import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from os.path import dirname, join
-import os
 from typing import Union
 
 import cv2

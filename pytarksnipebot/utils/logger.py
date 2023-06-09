@@ -1,7 +1,5 @@
-from functools import wraps
-from queue import Queue
-
 import time
+from functools import wraps
 from queue import Queue
 
 

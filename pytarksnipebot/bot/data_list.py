@@ -1,28 +1,27 @@
-data_list= [
+data_list = [
     ("Old firesteel", 39943, "therapist"),
     ("Silver Badge", 37982, "therapist"),
-    ("Aquapeps water purification tablets",18956 , "therapist"),
-    ("Tube of Poxeram cold welding",12222 , "therapist"),
-    ("Round pliers",17010 , "therapist"),
+    ("Aquapeps water purification tablets", 18956, "therapist"),
+    ("Tube of Poxeram cold welding", 12222, "therapist"),
+    ("Round pliers", 17010, "therapist"),
     ("Golden egg", 42840, "therapist"),
-    ("Missam forklift key",18900 , "therapist"),
+    ("Missam forklift key", 18900, "therapist"),
     ("Raven figurine", 30240, "therapist"),
     ("Axel parrot figurine", 32130, "therapist"),
-    ("Press pass (issued for NoiceGuy)",31500 , "therapist"),
-    ("Electronic components",11340 , "therapist"),
+    ("Press pass (issued for NoiceGuy)", 31500, "therapist"),
+    ("Electronic components", 11340, "therapist"),
     ("Gingy keychain", 50400, "therapist"),
     ("Can of Dr. Lupo's coffee beans", 32760, "therapist"),
-    ("Adrenaline injector",19819 , "therapist"),
+    ("Adrenaline injector", 19819, "therapist"),
     ("Flat screwdriver", 8820, "therapist"),
-    ("PC CPU",8765 , "therapist"),
-    ("Can of condensed milk",15714 , "therapist"),
+    ("PC CPU", 8765, "therapist"),
+    ("Can of condensed milk", 15714, "therapist"),
     ("SJ9 TGLabs combat stimulant injector", 56511, "therapist"),
     ("LVNDMARK's rat poison", 32061, "therapist"),
     ("Ultraviolet lamp", 9799, "therapist"),
     ("Flat screwdriver (Long)", 20790, "therapist"),
     ("Analog thermometer", 28728, "therapist"),
-    
-    #new
+    # new
     ("Golden Rooster", 57000, "therapist"),
     ("Hand Drill", 37800, "therapist"),
     ("Ratchet Wrench", 78000, "therapist"),
@@ -47,5 +46,4 @@ data_list= [
     ("Broken GPhone smartphone ", 11700, "therapist"),
     ("Dry fuel ", 26500, "therapist"),
     ("P22 (Product 22) stimulant injector ", 25300, "therapist"),
-  
 ]
