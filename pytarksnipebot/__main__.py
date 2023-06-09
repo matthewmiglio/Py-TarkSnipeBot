@@ -4,15 +4,17 @@ import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
-from bot.client import check_for_search_results
 
-from states import state_tree
-from utils.logger import Logger
-
-from utils.caching import cache_user_settings, check_user_settings, read_user_settings
-from utils.thread import StoppableThread, ThreadKilled
-
-from interface.layout import disable_keys, main_layout, user_config_keys
+from pytarksnipebot.bot.client import check_for_search_results
+from pytarksnipebot.interface.layout import disable_keys, main_layout, user_config_keys
+from pytarksnipebot.states import state_tree
+from pytarksnipebot.utils.caching import (
+    cache_user_settings,
+    check_user_settings,
+    read_user_settings,
+)
+from pytarksnipebot.utils.logger import Logger
+from pytarksnipebot.utils.thread import StoppableThread, ThreadKilled
 
 
 def save_current_settings(values):
@@ -243,9 +245,8 @@ def main():
 
 
 def dummy_main():
-    from bot.client import orientate_tarkov_client
-    from bot.client import click
     import pyautogui
+    from bot.client import click, orientate_tarkov_client
 
     # orientate_tarkov_client()
     # orientate_launcher()

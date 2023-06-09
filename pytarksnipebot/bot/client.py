@@ -1,15 +1,15 @@
-import pythoncom
 import time
 
 import numpy
 import pyautogui
 import pygetwindow
+import pythoncom
 import win32com.client as win32
 import win32gui
 from matplotlib import pyplot as plt
 from screeninfo import get_monitors
 
-from utils.image_rec import (
+from pytarksnipebot.utils.image_rec import (
     find_references,
     get_first_location,
     make_reference_image_list,

@@ -9,7 +9,7 @@ from winreg import HKEY_LOCAL_MACHINE, ConnectRegistry, OpenKey, QueryValueEx
 import numpy
 import pygetwindow
 
-from bot.client import (
+from pytarksnipebot.bot.client import (
     click,
     close_launcher,
     close_tarkov_client,
@@ -17,7 +17,11 @@ from bot.client import (
     orientate_tarkov_client,
     screenshot,
 )
-from utils.image_rec import check_for_location, find_references, pixel_is_equal
+from pytarksnipebot.utils.image_rec import (
+    check_for_location,
+    find_references,
+    pixel_is_equal,
+)
 
 
 def get_bsg_launcher_path() -> str:

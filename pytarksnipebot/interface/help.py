@@ -4,9 +4,7 @@ from .theme import THEME
 
 
 def show_help_gui():
-    out_text = (
-        "I got nothing so far..."
-    )
+    out_text = "I got nothing so far..."
 
     sg.theme(THEME)
     layout = [
