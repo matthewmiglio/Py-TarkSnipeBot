@@ -14,6 +14,7 @@ from pytarksnipebot.utils.image_rec import (
     get_first_location,
     make_reference_image_list,
 )
+from pytarksnipebot.utils.logger import Logger
 
 
 def get_to_flea_tab(logger, print_mode=True):
@@ -215,7 +216,7 @@ def check_if_offer_exists():
     return False
 
 
-def buy_this_offer(logger):
+def buy_this_offer(logger: Logger):
     if check_if_offer_exists():
         # click purchase
         click(1186, 152)

@@ -18,6 +18,7 @@ class Logger:
         self.restarts = 0
         self.ruble_snipes = 0
         self.specific_snipes = 0
+        self.snipes = 0
 
         # message stats
         self.message = ""
@@ -111,12 +112,10 @@ class Logger:
         seconds %= 60
         return "%d:%02d:%02d" % (hour, minutes, seconds)
 
-    def add_restart(self):
-        """add restart to log"""
-        self.restarts += 1
-
     def add_ruble_snipe(self):
         self.ruble_snipes += 1
+        self.snipes += 1
 
     def add_specific_snipe(self):
         self.specific_snipes += 1
+        self.snipes += 1
