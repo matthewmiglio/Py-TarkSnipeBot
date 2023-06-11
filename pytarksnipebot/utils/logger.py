@@ -59,6 +59,15 @@ class Logger:
     def add_snipe(self):
         self.snipes += 1
 
+    def add_ruble_snipe(self):
+        self.ruble_snipes += 1
+        self.snipes += 1
+
+    def add_specific_snipe(self):
+        self.specific_snipes += 1
+        self.snipes += 1
+
+
     @_updates_queue
     def error(self, message: str):
         """logs an error"""
@@ -112,10 +121,3 @@ class Logger:
         seconds %= 60
         return "%d:%02d:%02d" % (hour, minutes, seconds)
 
-    def add_ruble_snipe(self):
-        self.ruble_snipes += 1
-        self.snipes += 1
-
-    def add_specific_snipe(self):
-        self.specific_snipes += 1
-        self.snipes += 1

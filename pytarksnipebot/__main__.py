@@ -4,8 +4,8 @@ import webbrowser
 from queue import Queue
 
 import PySimpleGUI as sg
-
 from pytarksnipebot.bot.client import check_for_search_results
+
 from pytarksnipebot.interface.layout import disable_keys, main_layout, user_config_keys
 from pytarksnipebot.states import state_tree
 from pytarksnipebot.utils.caching import (

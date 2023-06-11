@@ -27,14 +27,14 @@ def state_tree(state, logger, jobs):
 
     if state == "item_snipe":
         if "item_sniping" in jobs:
-            state = item_snipe_main(logger, jobs[2])
+            state = specific_item_snipe_main(logger, jobs[2])
         else:
             state = "ruble_snipe"
 
     return state
 
 
-def item_snipe_main(logger, snipe_data):
+def specific_item_snipe_main(logger, snipe_data):
     # for each item in snipe_data, check for snipe
 
     item_index = 0
@@ -84,9 +84,9 @@ def restart_state(logger):
 
 
 def ruble_snipe_main(logger):
-    LOOP_PER_STATE = 6
-    # loop LOOP_PER_STATE times, then run state_tree again
-    for loop_index in range(LOOP_PER_STATE):
+    LOOPS_PER_STATE = 6
+    # loop LOOPS_PER_STATE times, then run state_tree again
+    for loop_index in range(LOOPS_PER_STATE):
         logger.log(f"Starting ruble snipe loop {loop_index}")
 
         # pick random item
