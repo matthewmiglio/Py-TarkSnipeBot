@@ -9,12 +9,20 @@ import win32gui
 from matplotlib import pyplot as plt
 from screeninfo import get_monitors
 
-from pytarksnipebot.utils.image_rec import (
+from utils.image_rec import (
     find_references,
     get_first_location,
     make_reference_image_list,
 )
-from pytarksnipebot.utils.logger import Logger
+from utils.logger import Logger
+
+
+def orientate_terminal():
+    try:
+        terminal_window = pygetwindow.getWindowsWithTitle("Py-Tark-Snipe-Bot v0.0.1")[0]
+        terminal_window.moveTo(pyautogui.size()[0] - 485, 0)
+    except:
+        print("Couldnt orientate terminal.")
 
 
 def get_to_flea_tab(logger, print_mode=True):
