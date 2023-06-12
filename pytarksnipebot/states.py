@@ -47,6 +47,7 @@ def specific_item_snipe_main(logger, snipe_data):
         )
 
         # get to flea
+        print('Getting to flea tab')
         if get_to_flea_tab(logger, print_mode=False) == "restart":
             logger.log(f"#8435683 Failure with getting to flea tab")
             return "restart"
