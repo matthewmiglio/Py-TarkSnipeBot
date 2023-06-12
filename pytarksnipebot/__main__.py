@@ -160,7 +160,7 @@ def main():
     logger = Logger(comm_queue, timed=False)  # dont time the inital logger
 
     # window layout
-    window = sg.Window("Py-Tark-Snipe-Bot", main_layout)
+    window = sg.Window("Py-Tark-Snipe-Bot v0.0.1", main_layout)
 
     load_last_settings(window)
 

@@ -17,6 +17,14 @@ from pytarksnipebot.utils.image_rec import (
 from pytarksnipebot.utils.logger import Logger
 
 
+def orientate_terminal():
+    try:
+        terminal_window = pygetwindow.getWindowsWithTitle("Py-Tark-Snipe-Bot v0.0.1")[0]
+        terminal_window.moveTo(pyautogui.size()[0] - 485, 0)
+    except:
+        print("Couldnt orientate terminal.")
+
+
 def get_to_flea_tab(logger, print_mode=True):
     if print_mode:
         logger.log("Getting to flea tab")
