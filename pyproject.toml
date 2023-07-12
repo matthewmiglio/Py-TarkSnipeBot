@@ -18,7 +18,7 @@ PyGetWindow = "^0.0.9"
 PyAutoGUI = "^0.9.54"
 pywin32 = "^306"
 screeninfo = "^0.8.1"
-matplotlib = "^3.7.1"
+matplotlib = "^3.7.2"
 
 
 [tool.poetry.group.dev.dependencies]
