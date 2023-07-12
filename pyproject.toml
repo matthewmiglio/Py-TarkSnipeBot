@@ -33,7 +33,7 @@ optional = true
 
 
 [tool.poetry.group.build.dependencies]
-Cx_Freeze = [{ version = "^6.15.2", platform = 'win32' }]
+Cx_Freeze = [{ version = "^6.15.3", platform = 'win32' }]
 
 
 [tool.black]
